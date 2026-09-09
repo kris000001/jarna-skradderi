@@ -155,7 +155,7 @@ with tab_about:
     
     about_html = """<div style="max-width: 850px; margin: 0 auto; background-color: #484b52; padding: 50px 60px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); border-top: 4px solid #c09e5a; text-align: center;">
 <div style="font-size: 3rem; color: #c09e5a; margin-bottom: 10px; line-height: 1;">❝</div>
-<p style="font-family: 'Playfair Display', serif; font-size: 1.35rem; color: #e4e6eb; line-height: 1.8; margin-bottom: 25px; font-weight: 400;">Jag heter <strong>X</strong> och jag har jobbat som skräddare i över 35 år, där jag har sytt allt från kostymer, klänningar, kjolar och kappor från grunden i väldigt hög kvalitet. Jag kan serva alla sorters symaskiner. Jag har flera års erfarenhet inom skomakeri och även nyckeltillverkning.</p>
+<p style="font-family: 'Playfair Display', serif; font-size: 1.35rem; color: #e4e6eb; line-height: 1.8; margin-bottom: 25px; font-weight: 400;">Jag heter <strong>Hani Bahnan</strong> och jag har jobbat som skräddare i över 35 år, där jag har sytt allt från kostymer, klänningar, kjolar och kappor från grunden i väldigt hög kvalitet. Jag kan serva alla sorters symaskiner. Jag har flera års erfarenhet inom skomakeri och även nyckeltillverkning.</p>
 <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin: 30px 0;">
 <div style="background-color: #383a40; padding: 10px 18px; border-radius: 20px; border: 1px solid #c09e5a; color: #ffffff; font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 500;">✂️ Skrädderi</div>
 <div style="background-color: #383a40; padding: 10px 18px; border-radius: 20px; border: 1px solid #c09e5a; color: #ffffff; font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 500;">👔 Kemtvätt</div>

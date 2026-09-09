@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Järna Kemtvätt</title>
+    <!-- Import Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Base Styling mimicking the Streamlit theme */
+        body {
+            background-color: #5c6068; 
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(192, 158, 90, 0.15) 0%, transparent 60%),
+                linear-gradient(135deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+                linear-gradient(225deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+                linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+                linear-gradient(315deg, rgba(255,255,255,0.03) 25%, transparent 25%);
+            background-size: 100% 100%, 40px 40px, 40px 40px, 40px 40px, 40px 40px;
+            background-position: 0 0, 0 0, 0 20px, 20px -20px, -20px 0px;
+            font-family: 'Inter', sans-serif;
+            color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            color: #ffffff;
+            margin-top: 0;
+        }
+        
+        .container {
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 2rem 15px 3rem 15px;
+        }
+
+        /* Header */
+        .header-section {
+            text-align: center;
+            padding-top: 1rem;
+            padding-bottom: 2rem;
+        }
+        .header-section h1 {
+            font-size: 4rem;
+            margin-bottom: 0;
+        }
+        .header-section h3 {
+            font-size: 1.3rem;
+            color: #c09e5a;
+            margin-top: 5px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            letter-spacing: 4px;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .tablink {
+            background-color: #484b52;
+            border: 1px solid #6b6f78;
+            border-bottom: 1px solid #6b6f78;
+            border-radius: 8px 8px 0 0;
+            padding: 12px 32px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #c5c8ce;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .tablink:hover {
+            color: #ffffff;
+            background-color: #545761;
+        }
+        .tablink.active {
+            background-color: #484b52;
+            border-bottom: 4px solid #c09e5a;
+            color: #ffffff;
+        }
+        .tabcontent {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Grid Layouts */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        /* Image Styling */
+        .image-card {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            transition: transform 0.3s ease;
+        }
+        .image-card:hover {
+            transform: scale(1.02);
+        }
+
+        /* Horizontal Rule */
+        hr.styled-hr {
+            border: 0;
+            border-top: 1px solid #6b6f78;
+            margin: 40px 0;
+        }
+
+        /* Lists */
+        ul.hours-list {
+            list-style: none;
+            padding: 0;
+            font-size: 1.1rem;
+        }
+        ul.hours-list li {
+            margin-bottom: 8px;
+        }
+
+        /* About Section */
+        .about-box {
+            max-width: 850px;
+            margin: 0 auto;
+            background-color: #484b52;
+            padding: 50px 60px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            border-top: 4px solid #c09e5a;
+            text-align: center;
+        }
+        .quote-icon {
+            font-size: 3rem;
+            color: #c09e5a;
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+        .about-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            color: #e4e6eb;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            font-weight: 400;
+        }
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        .badge {
+            background-color: #383a40;
+            padding: 10px 18px;
+            border-radius: 20px;
+            border: 1px solid #c09e5a;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 500;
+        }
+        .gradient-hr {
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(192, 158, 90, 0), rgba(192, 158, 90, 0.75), rgba(192, 158, 90, 0));
+            margin: 30px 0;
+        }
+
+        /* Reviews Section */
+        .review-card {
+            background-color: #484b52;
+            padding: 22px;
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+            border-left: 5px solid #c09e5a;
+            margin-bottom: 20px;
+        }
+        .review-header {
+            font-size: 1.15rem;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+        .review-text {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: #d0d3dc;
+            font-size: 1.25rem;
+        }
+
+        /* Mobile tweaks */
+        @media (max-width: 768px) {
+            .header-section h1 { font-size: 3rem; }
+            .tablink { padding: 10px 20px; font-size: 1.1rem; }
+            .about-box { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <!-- Title Section -->
+    <div class="header-section">
+        <h1>Järna Kemtvätt</h1>
+        <h3>SKRÄDDERI & KEMTVÄTT</h3>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="tabs">
+        <button class="tablink active" onclick="openTab(event, 'Hem')">Hem</button>
+        <button class="tablink" onclick="openTab(event, 'OmOss')">Om Oss</button>
+        <button class="tablink" onclick="openTab(event, 'Kontakt')">Omdömen & Kontakt</button>
+    </div>
+
+    <!-- TAB 1: HEM -->
+    <div id="Hem" class="tabcontent" style="display: block;">
+        <h2>Välkommen till oss!</h2>
+        <br>
+        
+        <!-- Image Grid -->
+        <div class="grid-3">
+            <img src="https://images.unsplash.com/photo-1598522325754-0a32506e76aa?auto=format&fit=crop&w=600&q=80" alt="Skrädderi" class="image-card">
+            <img src="https://images.unsplash.com/photo-1621516805177-3e81347043cb?auto=format&fit=crop&w=600&q=80" alt="Kemtvätt" class="image-card">
+            <img src="https://images.unsplash.com/photo-1582735689369-4fe89db7114c?auto=format&fit=crop&w=600&q=80" alt="Skomakeri & Nycklar" class="image-card">
+        </div>
+        
+        <hr class="styled-hr">
+        
+        <!-- Info & Map -->
+        <div class="grid-2">
+            <div>
+                <h2 style="font-family: 'Inter', sans-serif; font-size: 1.5rem; font-weight: 600;">Öppettider & Adress</h2>
+                <p style="font-size: 1.1rem;">📍 <strong>Adress:</strong> Storgatan 1A, 153 30 Järna</p>
+                <p style="font-size: 1.1rem; margin-bottom: 5px;"><strong>Öppettider:</strong></p>
+                <ul class="hours-list">
+                    <li><strong>Måndag - Fredag:</strong> 09:00 - 18:00</li>
+                    <li><strong>Lördag:</strong> 10:00 - 14:00</li>
+                    <li><strong>Söndag:</strong> Stängt</li>
+                </ul>
+            </div>
+            <div>
+                <h2 style="font-family: 'Inter', sans-serif; font-size: 1.5rem; font-weight: 600;">Hitta Hit</h2>
+                <iframe 
+                    width="100%" 
+                    height="270" 
+                    style="border:0; border-radius: 12px; box-shadow: 0 6px 15px rgba(0,0,0,0.3);" 
+                    loading="lazy" 
+                    allowfullscreen
+                    src="https://maps.google.com/maps?q=Storgatan%201A,%20153%2030%20J%C3%A4rna&t=&z=15&ie=UTF8&iwloc=&output=embed">
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 2: OM OSS -->
+    <div id="OmOss" class="tabcontent">
+        <br>
+        <div class="about-box">
+            <div class="quote-icon">❝</div>
+            <p class="about-text">
+                Jag heter <strong>Hani Bahnan</strong> och jag har jobbat som skräddare i över 35 år, där jag har sytt allt från kostymer, klänningar, kjolar och kappor från grunden i väldigt hög kvalitet. Jag kan serva alla sorters symaskiner. Jag har flera års erfarenhet inom skomakeri och även nyckeltillverkning.
+            </p>
+            
+            <div class="badges">
+                <div class="badge">✂️ Skrädderi</div>
+                <div class="badge">👔 Kemtvätt</div>
+                <div class="badge">🔑 Nyckeltillverkning</div>
+                <div class="badge">👞 Skomakeri</div>
+            </div>
+            
+            <p class="about-text">
+                På Järna Kemtvätt och Skrädderi erbjuder vi tjänster inom skrädderi, kemtvätt, nyckeltillverkning och skomakeri. Vi prioriterar kvalitet och strävar efter att nöja alla våra kunder.
+            </p>
+            
+            <hr class="gradient-hr">
+            
+            <p style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #c09e5a; font-style: italic; font-weight: 600; margin-bottom: 0;">
+                Du är alltid välkommen till Järna Kemtvätt och Skrädderi.
+            </p>
+        </div>
+        <br><br>
+    </div>
+
+    <!-- TAB 3: OMDÖMEN & KONTAKT -->
+    <div id="Kontakt" class="tabcontent">
+        <h2>Vad Våra Kunder Säger</h2>
+        
+        <!-- Mocked reviews since backend module is removed -->
+        <div class="review-card">
+            <div class="review-header">⭐⭐⭐⭐⭐ <strong>Johan S.</strong></div>
+            <div class="review-text">"Fantastisk service och otroligt duktig skräddare. Kostymen sitter perfekt efter justeringarna!"</div>
+        </div>
+        <div class="review-card">
+            <div class="review-header">⭐⭐⭐⭐⭐ <strong>Maria L.</strong></div>
+            <div class="review-text">"Räddade min klänning i sista sekunden. Mycket trevligt bemötande och snabb hantering."</div>
+        </div>
+        <div class="review-card">
+            <div class="review-header">⭐⭐⭐⭐⭐ <strong>Anders B.</strong></div>
+            <div class="review-text">"Alltid snabbt och professionellt, oavsett om det är kemtvätt eller nyckelkopiering. Rekommenderas varmt."</div>
+        </div>
+
+        <br><br>
+        <h2>Kontakta Oss</h2>
+        <p style="font-size: 1.15rem;">📞 <strong>Ring oss:</strong> 08-551 704 40</p>
+        <p style="font-size: 1.15rem;">✉️ <strong>E-post:</strong> jarnakemtvattskradderi@gmail.com</p>
+    </div>
+
+</div>
+
+<!-- JavaScript for Tab Switching -->
+<script>
+function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    
+    // Hide all tab content
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    
+    // Remove 'active' class from all buttons
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    
+    // Show current tab, add 'active' class to button
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+</script>
+
+</body>
+</html>
